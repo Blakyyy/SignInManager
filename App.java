@@ -10,11 +10,14 @@ import java.sql.Statement;
 public class App 
 {
     public static void main( String[] args ){
-        tryToLogin("dani", "6751221T");
+        String url = "jdbc:mysql://localhost:3306/?user=root";
+        String admin = "root";
+        String passkey = "6751221T";
+        tryToLogin("dani", "6751221T", url, admin, passkey);
     }
-    public static void tryToLogin(String username, String password){
-        if(userAlreadyExists(username) == true){
-            if(checkForPassword(password) == true){
+    public static void tryToLogin(String username, String password, String url, String admin, String passkey){
+        if(userAlreadyExists(username, url, admin, passkey) == true){
+            if(checkForPassword(password, url, admin, passkey) == true){
                 System.out.println("You entered your account");
                 }
                 else{
@@ -27,10 +30,7 @@ public class App
             
     }
 
-    public static boolean userAlreadyExists(String username){
-        String url = "jdbc:mysql://localhost:3306/?user=root";
-        String admin = "root";
-        String passkey = "6751221T";
+    public static boolean userAlreadyExists(String username, String url, String admin, String passkey){
         try {
             Connection connection = DriverManager.getConnection(url, admin, passkey);
             PreparedStatement statement = connection.prepareStatement("select * from LoginPassUi.users order by username;");
@@ -50,10 +50,7 @@ public class App
         
     }
 
-    public static boolean checkForPassword(String password){
-        String url = "jdbc:mysql://localhost:3306/?user=root";
-        String admin = "root";
-        String passkey = "6751221T";
+    public static boolean checkForPassword(String password, String url, String admin, String passkey){
         try {
             Connection connection = DriverManager.getConnection(url, admin, passkey);
             PreparedStatement statement = connection.prepareStatement("select * from LoginPassUi.users order by password;");
