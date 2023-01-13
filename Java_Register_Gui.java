@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import java.awt.event.*;
 
 public class Java_Register_Gui extends BackendMethods implements ActionListener{
+
+    //This class is the GUI when user press "Sign up" button. 
     public String[] emailUserPass = new String[3];
     private static JFrame registerFrame;
     private static JPanel registerPanel;
@@ -63,6 +65,7 @@ public class Java_Register_Gui extends BackendMethods implements ActionListener{
 
     }
 
+    //Backend functions when user presses "Sign up" button
     @Override
     public void actionPerformed(ActionEvent e) {
         emailUserPass[0] = emailText.getText();
@@ -83,6 +86,7 @@ public class Java_Register_Gui extends BackendMethods implements ActionListener{
             }
     } 
 
+    //Collect the input of username field with  check if user entred a username with a space at end.
     public String actionPerformedUser(ActionEvent e){
         String[] userTextArray = usernameText.getText().split("");
         if(userTextArray[userTextArray.length - 1].equals(" ")){

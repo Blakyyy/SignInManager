@@ -7,11 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.event.*;
-import java.util.ArrayList;
+
 
 
 public class Java_GUI extends BackendMethods implements ActionListener { 
 
+    //This class is the firs GUI that user see when stars a program
     private static JFrame frame;
     private static JPanel pannel;
     private static JLabel userLabel;
@@ -67,6 +68,7 @@ public class Java_GUI extends BackendMethods implements ActionListener {
         frame.setVisible(true);
     }
 
+    //Call of backend functions when user press the button "Login"
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == button){
@@ -88,6 +90,7 @@ public class Java_GUI extends BackendMethods implements ActionListener {
         }
     }
     
+    //Collect the input of username field with  check if user entred a username with a space at end.
     public String actionPerformedUser(ActionEvent e){
         String[] userTextArray = userText.getText().split("");
         if(userTextArray[userTextArray.length - 1].equals(" ")){
