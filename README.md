@@ -1,41 +1,39 @@
 This is a personal project that uses the Maven framework with MySQLConnect and JBCrypt dependencies.
 
-BackendMethods Class
---------------------
+his is a personal project that utilizes the Maven framework, along with MySQLConnect and JBCrypt dependencies to create a simple user authentication system.
+
+Classes Overview
+----------------
+
+### BackendMethods Class
 
 The `BackendMethods` class contains the following fields:
 
--   `admin`: enter the name of a root administrator to the database
--   `url`: enter the URL of a database
--   `passkey`: enter password to enter the database.
+-   `admin`: Enter the root administrator's name for the database.
+-   `url`: Enter the URL of the database.
+-   `passkey`: Enter the password to access the database.
 
-Note that you should also check the functions with SQL queries to change the name of the database and table to use.
+**Note**: Make sure to update the SQL queries within the functions to match the names of your database and table.
+The `BackendMethods` class provides the following methods:
 
-The following methods are available in the `BackendMethods` class:
+-   `userAlreadyExist`: Checks if the user input in the `username` field already exists in the database. Returns `true` if it does, otherwise `false`.
+-   `checkForPassword`: Verifies if the user input in the `password` field matches the hashed password in the database. Returns `true` if it does, otherwise `false`.
+-   `tryToLogin`: Utilizes `userAlreadyExist` and `checkForPassword` methods. Returns `true` if both methods return `true`, indicating a successful login. Returns `false` otherwise.
+-   `signUp`: Validates the username and email fields before registering a new user. Returns 1 if successful, -1 if the email is invalid, -2 if the username already exists, and -3 if an SQL exception occurs.
+### Java_Gui Class
 
--   `userAlreadyExist`: check if the input of the user in the field `username` is inside the database and return `true` if it is. If it's not, the method returns `false`.
--   `checkForPassword`: check if the input of user in the field `password` equals to the hashed password in the database. It returns `true` if it does. If it's not, the method returns `false`.
--   `tryToLogin`: uses the `userAlreadyExist` and `checkForPassword` methods. It returns `true` if the last 2 methods returned `true`, meaning the login is successful. It returns `false` if either of the previous methods returned `false`.
--   `signUp`: this method uses the `userAlreadyExist` method to know if there is already a user with the same username in the database. If there isn't, it also checks the email field to have symbol "@" and if it does, the signUp will be successful and the method returns 1. If the email field doesn't have "@" inside, then the method returns -1. If a user with this username already exists, the method returns -2. If there is any SQL exception, it prints the stack trace and returns -3.
+`Java_Gui` serves as the primary user interface that the user sees when the application is executed. This class provides the following methods:
 
-Java_Gui Class
---------------
+-   `actionPerformed`: Handles the "Login" button click event. It calls the `tryToLogin` method from the `BackendMethods` class. If the "Sign Up" button is clicked, the `Java_Register_Gui` class is launched.
+-   `actionPerformedUser`: Retrieves the text from the username field and trims any trailing spaces.
+-   `actionPerformedPassword`: Retrieves the text from the password field.
 
-`Java_Gui` is the main user interface which the user sees when the application is executed. The following methods are available in this class:
+### Java_Register_Class
 
--   `actionPerformed`: this is the backend for when the user presses the "Login" button. It also uses the `tryToLogin` method from the `BackendMethod` class. If the user presses the "Sign up" button, the `Java_Register_Gui` class starts.
--   `actionPerformedUser`: this gets the text from the username field. It also checks if the user entered the username with a space at the end ("admin ") and deletes it.
--   `actionPerformedPassword`: this gets the text from the password field.
+`Java_Register_Class` is the secondary user interface that appears when the user clicks the "Sign Up" button. This class provides the following methods:
+-   `actionPerformed`: Handles the "Sign Up" button click event, utilizing the `signUp` method from the `BackendMethods` class.
+-   `actionPerformedUser`: Retrieves the text from the username field and trims any trailing spaces.
 
-Java_Register_Class
--------------------
+### FinalApplication Class
 
-`Java_Register_Class` is the second user interface that activates when the user presses the "Sign up" button. The following methods are available in this class:
-
--   `actionPerformed`: this is the backend of the "Sign up" button, which uses the `signUp` method from `BackendMethod` class.
--   `actionPerformedUser`: this gets the text from the username field. It also checks if the user entered the username with a space at the end ("admin ") and deletes it.
-
-FinalApplication Class
-----------------------
-
-`FinalApplication` class starts the whole program.
+The `FinalApplication` class serves as the entry point for the entire program.
